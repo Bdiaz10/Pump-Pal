@@ -4,18 +4,15 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 
-const LoginScreen = ({navigation}) => {
+const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/favicon.png')}
-        style={styles.logo}
-      />
 
-      <Text style={styles.text}>Pump Pal Login</Text>
+      <Text style={styles.text}>Create an account</Text>
 
       <FormInput
         labelValue={email}
@@ -35,20 +32,33 @@ const LoginScreen = ({navigation}) => {
         secureTextEntry={true}
       />
 
-      <FormButton
-        buttonTitle="Sign In"
-        onPress={() => alert("Sign In Clicked")}
+      <FormInput
+        labelValue={confirmPassword}
+        onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)} 
+        placeHolderText={'Confirm Password'}
+        iconType="lock"
+        secureTextEntry={true}
       />
 
-      <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
-        <Text styles={styles.navButtonText}>
-          Forgot Password?
+      <FormButton
+        buttonTitle="Sign up"
+        onPress={() => alert("Sign Up Clicked")}
+      />
+
+      <View style={styles.textPrivate}>
+        <Text style={styles.color_textPrivate}>
+          By Registering, you are accepting our
         </Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => alert("Terms of service Clicked!")}>
+          <Text style={[styles.color_textPrivate, {color: "#e88832"}]}>Terms of service</Text>
+        </TouchableOpacity>
+        <Text style={styles.color_textPrivate}> and </Text>
+        <Text style={[styles.color_textPrivate, {color: "#e88832"}]}>Privacy Policy</Text>
+      </View>
 
 
       <SocialButton
-        buttonTitle="Sign in with Google"
+        buttonTitle="Sign up with Google"
         btnType="google"
         color="#de4d41"
         backgroundColor="#f5e7ea"
@@ -57,10 +67,10 @@ const LoginScreen = ({navigation}) => {
 
 
       <TouchableOpacity
-        style={styles.forgotButton} 
-        onPress={() => navigation.navigate('Signup')}>
+        style={styles.navButton} 
+        onPress={() => navigation.navigate('Login')}>
         <Text style={styles.navButtonText}>
-          Don't have account? Create here
+          Have an account? Sign in
         </Text>
       </TouchableOpacity>
     </View>
@@ -68,7 +78,7 @@ const LoginScreen = ({navigation}) => {
   );
 };
 
-export default LoginScreen;
+export default SignupScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -76,11 +86,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     paddingTop: 50
-  },
-  logo: {
-    height: 150,
-    width: 150,
-    resizeMode: 'cover',
   },
   text: {
     // fontFamily: 'Kufam-SemiBoldItalic',
@@ -91,13 +96,22 @@ const styles = StyleSheet.create({
   navButton: {
     marginTop: 15,
   },
-  forgotButton: {
-    marginVertical: 35,
-  },
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
     color: '#2e64e5',
     // fontFamily: 'Lato-Regular',
+  },
+  textPrivate: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginVertical: 35,
+    justifyContent: 'center',
+  },
+  color_textPrivate: {
+    fontSize: 13,
+    fontWeight: '400',
+    // fontFamily: 'Lato-Regular',
+    color: 'grey',
   },
 });

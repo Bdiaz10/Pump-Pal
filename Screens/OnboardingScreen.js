@@ -3,6 +3,7 @@ import {View, Text, Image, TouchableOpacity, Button, StyleSheet} from 'react-nat
 
 import Onboarding from 'react-native-onboarding-swiper';
 
+// customize dots
 const Dots = ({selected}) => {
   let backgroundColor;
 
@@ -17,7 +18,6 @@ const Dots = ({selected}) => {
         backgroundColor
       }}
     >
-
     </View>
   )
 }
@@ -62,17 +62,19 @@ const OnboardingScreen = ({navigation}) => {
     pages={[
       {
         backgroundColor: '#33beff',
-        // image: <Image source={require('../assets/')} />,
-        title: 'Onboarding',
+        image: <Image source={require('../assets/favicon.png')} />,
+        title: 'Braxtons app Onboarding',
         subtitle: 'Done with React Native Onboarding Swiper'
       },
       {
         backgroundColor: '#336fff',
+        image: <Image source={require('../assets/favicon.png')} />,
         title: 'Onboarding 2',
         subtitle: 'Done with React Native Onboarding Swiper'
       },
       {
         backgroundColor: '#5b33ff',
+        image: <Image source={require('../assets/favicon.png')} />,
         title: 'Onboarding 3',
         subtitle: 'Done with React Native Onboarding Swiper'
       },
@@ -83,11 +85,3 @@ const OnboardingScreen = ({navigation}) => {
 };
 
 export default OnboardingScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
