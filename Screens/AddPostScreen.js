@@ -3,22 +3,19 @@ import { View, Text, StyleSheet} from 'react-native';
 import FormButton from "../components/FormButton"
 import {AuthContext} from "../navigation/AuthProvider";
 
-const HomeScreen = () => {
+const AddPostScreen = () => {
 
   const {user, logout} = useContext(AuthContext)
 
   return (
     <View style={styles.container}>
-      <Text>Welcome to the home screen</Text>
-      <Text>User: {user.email}</Text>
-      <FormButton buttonTitle="Logout" onPress={() => logout()}>
-    
-      </FormButton>
+      <Text>Add Post</Text>
+      
     </View>
   );
 };
 
-export default HomeScreen;
+export default AddPostScreen;
 
 const styles = StyleSheet.create({
   container: {

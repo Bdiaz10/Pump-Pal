@@ -57,23 +57,23 @@ const OnboardingScreen = ({navigation}) => {
     DoneButtonComponent={Done}
     DotComponent={Dots}
     onSkip={()=> navigation.replace("Login")}
-    onDone={()=> navigation.navigate("Login")}
+    onDone={()=> navigation.replace("Login")}
 
     pages={[
       {
-        backgroundColor: '#33beff',
+        backgroundColor: '#13AFC2',
         image: <Image source={require('../assets/favicon.png')} />,
         title: 'Braxtons app Onboarding',
         subtitle: 'Done with React Native Onboarding Swiper'
       },
       {
-        backgroundColor: '#336fff',
+        backgroundColor: '#0F8A99',
         image: <Image source={require('../assets/favicon.png')} />,
         title: 'Onboarding 2',
         subtitle: 'Done with React Native Onboarding Swiper'
       },
       {
-        backgroundColor: '#5b33ff',
+        backgroundColor: '#0B6570',
         image: <Image source={require('../assets/favicon.png')} />,
         title: 'Onboarding 3',
         subtitle: 'Done with React Native Onboarding Swiper'
