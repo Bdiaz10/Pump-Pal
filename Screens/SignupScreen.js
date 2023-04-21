@@ -58,14 +58,14 @@ const SignupScreen = ({navigation}) => {
         <Text style={[styles.color_textPrivate, {color: "#e88832"}]}>Privacy Policy</Text>
       </View>
 
-
+{/* 
       <SocialButton
         buttonTitle="Sign up with Google"
         btnType="google"
         color="#de4d41"
         backgroundColor="#f5e7ea"
         onPress={() => {}}
-      />
+      /> */}
 
 
       <TouchableOpacity

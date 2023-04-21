@@ -13,10 +13,10 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require('../assets/favicon.png')}
         style={styles.logo}
-      />
+      /> */}
 
       <Text style={styles.text}>Pump Pal Login</Text>
 
@@ -50,13 +50,13 @@ const LoginScreen = ({navigation}) => {
       </TouchableOpacity>
 
 
-      <SocialButton
+      {/* <SocialButton
         buttonTitle="Sign in with Google"
         btnType="google"
         color="#de4d41"
         backgroundColor="#f5e7ea"
         onPress={() => {}}
-      />
+      /> */}
 
 
       <TouchableOpacity

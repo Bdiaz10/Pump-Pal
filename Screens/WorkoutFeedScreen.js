@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, } from 'react-native';
 
-
 import {Container} from '../Styles/WorkoutFeedStyles';
 import PostCard from '../components/PostCard';
 import { FlatList } from 'react-native-gesture-handler';
@@ -68,7 +67,6 @@ const WorkoutFeedScreen = ({navigation}) => {
         keyExtractor={item=>item.id}
         showsVerticalScrollIndicator={false}
       />
-
     </Container>
   );
 };

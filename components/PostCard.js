@@ -5,7 +5,7 @@ import {Card, UserImg, UserInfo, UserName, UserInfoText, PostTime, WorkoutTitle,
 const PostCard = ({item, navigation}) => {
 
   return (
-      <Card onPress={()=>navigation.navigate('FullWorkout')}>
+      <Card onPress={()=>navigation.navigate('FullWorkout', item)}>
         <UserInfo>
           <UserImg source={item.userImg} />
           <UserInfoText>
