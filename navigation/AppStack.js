@@ -12,6 +12,9 @@ import MyWorkoutScreen from '../Screens/MyWorkoutScreen';
 import WorkoutFeedScreen from '../Screens/WorkoutFeedScreen';
 import AddPostScreen from '../Screens/AddPostScreen';
 import FullWorkoutScreen from '../Screens/FullWorkoutScreen';
+import ViewFollowingScreen from '../Screens/ViewFollowingScreen';
+import ViewFollowersScreen from '../Screens/ViewFollowersScreen';
+import AddFriendsScreen from '../Screens/AddFriendsScreen';
 
 
 
@@ -182,12 +185,63 @@ const ProfileStack = ({navigation}) => (
       }}
     />
     <Stack.Screen
-      name="EditProfile"
-      component={EditProfileScreen}
+      name="ViewFollowing"
+      component={ViewFollowingScreen}
       options={{
-        headerTitle: 'Edit Profile',
+        headerTitle: 'Following',
         headerBackTitleVisible: false,
         headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#fff',
+          shadowColor: '#fff',
+          elevation: 0,
+        },
+        headerRight: () => (
+          <View style={{marginRight: 10}}>
+            <FontAwesome5.Button
+              name="plus"
+              size={22}
+              backgroundColor="#fff"
+              color="#2e64e5"
+              onPress={() => alert('clicked!')}
+            />
+          </View>
+        ),
+      }}
+    />
+    <Stack.Screen
+      name="ViewFollowers"
+      component={ViewFollowersScreen}
+      options={{
+        headerTitle: 'Followers',
+        headerBackTitleVisible: false,
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#fff',
+          shadowColor: '#fff',
+          elevation: 0,
+        },
+        headerRight: () => (
+          <View style={{marginRight: 10}}>
+            <FontAwesome5.Button
+              name="plus"
+              size={22}
+              backgroundColor="#fff"
+              color="#2e64e5"
+              onPress={() => alert('clicked!')}
+            />
+          </View>
+        ),
+      }}
+    />
+
+    <Stack.Screen
+      name="AddFriends"
+      component={AddFriendsScreen}
+      options={{
+        headerTitle: "Add Friends",
+        headerTitleAlign: 'center',
+        headerBackTitleVisible: false,
         headerStyle: {
           backgroundColor: '#fff',
           shadowColor: '#fff',

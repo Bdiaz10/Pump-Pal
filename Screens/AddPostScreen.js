@@ -1,33 +1,61 @@
-import React, { useState, useRef, createContext } from 'react';
+import React, { useState, useRef, createContext, useContext } from 'react';
 import { View, Text, StyleSheet, Button, SafeAreaView, FlatList } from 'react-native';
 import { InputTitleField, InputTitleWraper, InputNotesField, Container} from '../Styles/AddPostStyles';
 import ExercizeCard from '../components/ExercizeCard';
+
+
+import {AuthContext} from "../navigation/AuthProvider"
+import {db} from "../firebase"
+import { collection, addDoc } from "firebase/firestore"; 
+
 
 const AddPostScreen = () => {
   const [workoutTitle, setWorkoutTitle] = useState('');
   const [workoutDescription, setWorkoutDescription] = useState('');
   const [exercises, setExercises] = useState([]);
   const [listData, setListData] = useState([]);
+  const [postPublic, setPostPublic] = useState(true);
+
+  const {user} = useContext(AuthContext);
 
   const handleAddExercise = () => {
     setListData([...listData, <ExercizeCard getExercises={getExercises}/>]);
     
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const fullWorkout = {
-      id: 0,
-      date: '',
       title: workoutTitle,
       desc: workoutDescription,
       exercises: exercises
     }
 
-    alert(JSON.stringify(fullWorkout))
+    try{
+      const docRef = await addDoc(collection(db, "Posts"), {
+        userId: user.uid,
+        email: user.email,
+        date: Date.now(),
+        postTime: new Date(),
+        content: fullWorkout,
+        postPublic: postPublic,
+        likes: null,
+        comments: null
+      })
+      alert("Success" + docRef.id);
+      
+    }catch (e) {
+      console.log(e);
+    }
+
   }
 
   const getExercises = (data) => {
-    setExercises([...exercises, data])
+    const newExercise = {
+      id: listData.length +1,
+      title: data.title,
+      sets: data.sets
+    }
+    setExercises([...exercises, newExercise])
   }
 
 
@@ -62,7 +90,7 @@ const AddPostScreen = () => {
 
       <Button
        title="Submit"
-       onPress={handleSubmit}
+       onPress={() => handleSubmit()}
       />
 
     </View>

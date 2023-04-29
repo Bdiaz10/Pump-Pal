@@ -35,12 +35,12 @@ const FullWorkoutScreen = () => {
     <View style={styles.container}>
 
       <TitleWrapper>
-        <WorkoutTitle>{route.params.title}</WorkoutTitle>
-        <WorkoutNotes>{route.params.notes}</WorkoutNotes>
+        <WorkoutTitle>{route.params.content.title}</WorkoutTitle>
+        <WorkoutNotes>{route.params.content.desc}</WorkoutNotes>
       </TitleWrapper>
 
       <FlatList style={styles.list}
-        data={route.params.exercises}
+        data={route.params.content.exercises}
         renderItem={({item}) => <WorkoutCard title={item.title} sets={item.sets}></WorkoutCard>}
         keyExtractor={item=>item.id}
       >

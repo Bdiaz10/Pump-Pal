@@ -9,12 +9,12 @@ const MyWorkoutCard = ({item, navigation, deleteExercise}) => {
   return (
     <Card onPress={()=>navigation.navigate('FullWorkout', item)}>
       <WorkoutInfo>
-        <WorkoutTitle>{item.title}</WorkoutTitle>
-        <WorkoutNotes>{item.notes}</WorkoutNotes>
+        <WorkoutTitle>{item.content.title}</WorkoutTitle>
+        <WorkoutNotes>{item.content.desc}</WorkoutNotes>
       </WorkoutInfo>
 
       
-      <Button onPress={() => deleteExercise(item.title)} title={'Delete card'}></Button>
+      <Button onPress={() => deleteExercise(item.content.title)} title={'Delete card'}></Button>
       
     </Card>
 

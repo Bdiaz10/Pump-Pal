@@ -58,7 +58,12 @@ const ExercizeCard = ({getExercises}) => {
   }
 
   const getSets = (data) => {
-    setSets([...sets, data]);
+    const newSet = {
+      id: listData.length +1,
+      weight: data.weight,
+      reps: data.reps
+    }
+    setSets([...sets, newSet]);
   }
 
   
