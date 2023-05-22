@@ -1,6 +1,7 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Card, UserImg, UserInfo, UserName, UserInfoText, PostTime, WorkoutTitle, WorkoutNotes, WorkoutInfo, InteractionWrapper, Interaction, InteractionText} from '../Styles/WorkoutFeedStyles';
+import { View } from 'react-native';
+import {Card, Arrow, UserImg, UserInfo, UserName, UserInfoText, PostTime, WorkoutTitle, WorkoutNotes, WorkoutInfo, InteractionWrapper, Interaction, InteractionText} from '../Styles/WorkoutFeedStyles';
 
 const PostCard = ({item, navigation}) => {
 
@@ -27,25 +28,31 @@ const PostCard = ({item, navigation}) => {
       <Card onPress={()=>navigation.navigate('FullWorkout', item)}>
         <UserInfo>
           {/* <UserImg source={item.userImg} /> */}
+          <UserImg source={require('../assets/profile-holder.jpeg')}/>
           <UserInfoText>
             <UserName>{item.email}</UserName>
-            <PostTime>{item.date}</PostTime>
+            <PostTime>2 hours ago</PostTime>
+            {/* <PostTime>{item.date}</PostTime> */}
           </UserInfoText>
 
         </UserInfo>
 
-        <WorkoutInfo>
-          <WorkoutTitle>{item.content.title}</WorkoutTitle>
-          <WorkoutNotes>{item.content.desc}</WorkoutNotes>
-        </WorkoutInfo>
+
+        <View style={{flexDirection: 'row'}}>
+          <WorkoutInfo>
+            <WorkoutTitle>{item.content.title}</WorkoutTitle>
+            <WorkoutNotes>{item.content.desc}</WorkoutNotes>
+          </WorkoutInfo>
+          {/* can add a 'next arrow' */}
+        </View>
 
         <InteractionWrapper>
           <Interaction active={item.liked}>
-            <Ionicons name={likeIcon} size={25} color={likeIconColor} />
+            <Ionicons name={likeIcon} size={20} color={likeIconColor} />
             <InteractionText active={item.liked}>{likeText}</InteractionText>
           </Interaction>
           <Interaction>
-            <Ionicons name="md-chatbubble-outline" size={25} />
+            <Ionicons name="md-chatbubble-outline" size={20} />
             <InteractionText>{commentText}</InteractionText>
           </Interaction>
           {/* {user.uid == item.userId ? (
@@ -53,7 +60,7 @@ const PostCard = ({item, navigation}) => {
               <Ionicons name="md-trash-bin" size={25} />
             </Interaction>
           ) : null} */}
-      </InteractionWrapper>
+        </InteractionWrapper>
       </Card>
 
   );

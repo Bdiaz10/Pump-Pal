@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {Container} from '../Styles/WorkoutFeedStyles';
+import {Container, Background} from '../Styles/WorkoutFeedStyles';
 import MyWorkoutCard from '../components/MyWorkoutCard';
 import { FlatList } from 'react-native-gesture-handler';
 import {UserImg, UserInfo} from '../Styles/MyWorkoutStyles'
@@ -145,47 +145,49 @@ const MyWorkoutScreen = ({navigation}) => {
   const [loading, setLoading] = useState(null);
   
   const fetchMyWorkouts = async () => {
-    const list = [];
-    try {
-
-      const q = query(collection(db, "Posts"), where("userId", "==", user.uid));
-      // const querySnapshot = await getDocs(collection(db, "Posts"));
-      const querySnapshot = await getDocs(q);
-      
-      querySnapshot.forEach((doc) => {
-        const {
-          userId,
-          date,
-          postTime,
-          content,
-          postPublic
-        } = doc.data();
+    
+      const unsubscribe = onSnapshot(
+        query
+        (collection(db, "Posts"), 
+        where("userId", "==", user.uid)
+        ),
         
-        list.push({
-          id: doc.id,
-          userId,
-          date,
-          postTime,
-          content,
-          postPublic
-        });
+        (snapshot) => {
+            const list = [];
+            snapshot.forEach((doc) => {
+              const {
+                userId,
+                date,
+                postTime,
+                content,
+                postPublic
+              } = doc.data();
+              
+              list.push({
+                id: doc.id,
+                userId,
+                date,
+                postTime,
+                content,
+                postPublic
+              });
+            })
+            setMyWorkouts(list);
+            setLoading(false);
+          },
+          (error) => {
+            alert(error);
+          }
+      )
+      return unsubscribe;
         
-        setMyWorkouts(list);
-
-        if (loading){
-          setLoading(false);
-        }
-        console.log('myWorkouts', userId)
-      })
-    } catch (e) {
-      alert(e);
-    }
   };
 
   useEffect(() => {
     fetchMyWorkouts();
   }, []);
 
+  
 
   const deleteExercise = (ExerciseId) => {
     // search through exercises to find the id and delete
@@ -193,23 +195,26 @@ const MyWorkoutScreen = ({navigation}) => {
   }
   
   return (
-    <Container>
-      <UserImg source={require('../assets/users/pika.png')} />
-      <UserInfo>{user.email}</UserInfo>
-      
+ 
 
-      <FlatList
-        data={myWorkouts}
-        renderItem={({item}) => (
-          <MyWorkoutCard 
-            item={item}
-            navigation={navigation}
-            deleteExercise={deleteExercise}
-          />)}
-        keyExtractor={item=>item.id}
-        showsVerticalScrollIndicator={false}
-      />
-    </Container>
+      <Container>
+        {/* <UserImg source={require('../assets/users/pika.png')} />
+        <UserInfo>{user.email}</UserInfo> */}
+        
+
+        <FlatList
+          data={myWorkouts}
+          renderItem={({item}) => (
+            <MyWorkoutCard 
+              item={item}
+              navigation={navigation}
+              deleteExercise={deleteExercise}
+            />)}
+          keyExtractor={item=>item.id}
+          showsVerticalScrollIndicator={false}
+        />
+      </Container>
+  
   );
 };
 

@@ -50,7 +50,7 @@ export const AuthProvider = ({children}) => {
           try {
             await signOut(auth);
           }catch (e){
-            console.log(e);
+           console.log(e);
           }
         }
       }}

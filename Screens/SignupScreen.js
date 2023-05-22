@@ -4,6 +4,7 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import {AuthContext} from "../navigation/AuthProvider";
+import {windowHeight, windowWidth} from '../utils/Dimensions';
 
 const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState();
@@ -84,16 +85,18 @@ export default SignupScreen;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+   
     alignItems: 'center',
     padding: 20,
-    paddingTop: 50
+    paddingTop: 50,
+    backgroundColor:'#167C9D',
+    height: windowHeight
   },
   text: {
     // fontFamily: 'Kufam-SemiBoldItalic',
     fontSize: 28,
     marginBottom: 10,
-    color: '#051d5f',
+    color: 'white',
   },
   navButton: {
     marginTop: 15,
@@ -101,7 +104,7 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#2e64e5',
+    color: 'white',
     // fontFamily: 'Lato-Regular',
   },
   textPrivate: {
@@ -114,6 +117,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '400',
     // fontFamily: 'Lato-Regular',
-    color: 'grey',
+    color: 'white',
   },
 });

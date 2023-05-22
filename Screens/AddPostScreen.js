@@ -1,6 +1,7 @@
-import React, { useState, useRef, createContext, useContext } from 'react';
-import { View, Text, StyleSheet, Button, SafeAreaView, FlatList } from 'react-native';
+import React, { useState, useRef, createContext, useContext, useEffect } from 'react';
+import { View, Text, StyleSheet, Button, SafeAreaView, FlatList, TouchableOpacity, Pressable } from 'react-native';
 import { InputTitleField, InputTitleWraper, InputNotesField, Container} from '../Styles/AddPostStyles';
+import { windowHeight, windowWidth } from '../utils/Dimensions';
 import ExercizeCard from '../components/ExercizeCard';
 
 
@@ -9,12 +10,18 @@ import {db} from "../firebase"
 import { collection, addDoc } from "firebase/firestore"; 
 
 
-const AddPostScreen = () => {
+const AddPostScreen = ({ route, navigation }) => {
   const [workoutTitle, setWorkoutTitle] = useState('');
   const [workoutDescription, setWorkoutDescription] = useState('');
   const [exercises, setExercises] = useState([]);
   const [listData, setListData] = useState([]);
   const [postPublic, setPostPublic] = useState(true);
+  
+  const  postState  = route.params;
+  
+  // useEffect(() => {
+  //   setPostPublic(postState);
+  // }, [postPublic]);
 
   const {user} = useContext(AuthContext);
 
@@ -29,6 +36,7 @@ const AddPostScreen = () => {
       desc: workoutDescription,
       exercises: exercises
     }
+    setPostPublic(postState.postState);
 
     try{
       const docRef = await addDoc(collection(db, "Posts"), {
@@ -58,40 +66,75 @@ const AddPostScreen = () => {
     setExercises([...exercises, newExercise])
   }
 
+  // const handleLockClick = () => {
+  //   alert('change privacy')
+  // }
+  // let privacy = () => {
+  //   if (postPublic){
+      
+  //     return "Public";
+  //   }else {
+     
+  //     return "Private";
+  //   }
+  // }
+
 
   return (
     <View style={styles.container}>
       <InputTitleWraper>
         <InputTitleField
           value={workoutTitle}
-          placeholder="Title your Workout"
+          placeholder="Title your workout"
           onChangeText={(workoutTitle) => setWorkoutTitle(workoutTitle)} 
-        />
+          />
         <InputNotesField
           value={workoutDescription}
-          placeholder="Workout Description"
+          placeholder="Workout description"
           numberOfLines={2}
           onChangeText={(workoutDescription) => setWorkoutDescription(workoutDescription)}
-        />
-      </InputTitleWraper>
-      
-      <Button
-       title="Add Exercise"
-       onPress={handleAddExercise}
-       />
-      
-        <FlatList style={styles.list}
-          data={listData}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) => item}
-          showsVerticalScrollIndicator={false}
-          windowSize={5}
-        />
+          />
+          {/* <Button
+            title={privacy}
+            color={'red'}
+            onPress={() => {setPostPublic(!postPublic)}}
+          /> */}
 
-      <Button
+          {/* <TouchableOpacity onPress={() => {
+            setPostPublic(!postPublic)
+            setPrivacyColor(!postPublic ? '#167C9D' : 'red');
+            }}
+            style={{backgroundColor: privacyColor, width: 350, alignItems: 'center', borderRadius: 20, marginTop: 5}}
+            >
+            <Text style={{color: 'white'}} >{privacy()}</Text>
+          </TouchableOpacity> */}
+      </InputTitleWraper>
+      <Pressable onPress={handleAddExercise} style={{alignSelf: 'center', paddingHorizontal: 5}}>
+          <Text style={{color: '#167C9D', alignSelf: 'center', fontWeight: 'bold', fontSize:16}}>
+            Add Exercise
+          </Text>
+        </Pressable>
+      
+      
+      <FlatList style={styles.list}
+        data={listData}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item}) => item}
+        showsVerticalScrollIndicator={false}
+        windowSize={5}
+      />
+
+      {/* <Button
        title="Submit"
        onPress={() => handleSubmit()}
-      />
+      /> */}
+
+      <TouchableOpacity onPress={() => alert('submit')} style={styles.submitButton}  >
+        <Text style={styles.submitText}>
+          Post {postState.postState ? 'Public' : 'Private'}
+          
+        </Text>
+      </TouchableOpacity>
 
     </View>
   );
@@ -103,9 +146,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    padding: 20,
+    padding: 10,
+    backgroundColor:'white'
   },
   list: {
-    width: 375
+    width: windowWidth,
+    
   },
+  submitButton: {
+    position: 'absolute',
+    bottom: 0,
+    marginTop: 10,
+    marginBottom: 10,
+    width: '100%',
+    height: windowHeight / 16,
+    backgroundColor: '#167C9D',
+    padding: 8,
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  submitText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+  } ,
 })

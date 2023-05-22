@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {Card, WorkoutTitle, Weight, Reps, SetWrapper, SetsContainer, ETitle} from "../Styles/ExercizeCardStyles";
-import { Text, Button, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
+import { Text, Button, KeyboardAvoidingView, TouchableOpacity, Pressable} from 'react-native';
 import { FlatList, Swipeable } from 'react-native-gesture-handler';
 
 const Set = ({data, getSets}) => {
@@ -79,7 +79,11 @@ const ExercizeCard = ({getExercises}) => {
           placeholder="Exercise Title"
           onChangeText={(exerciseTitle) => setExerciseTitle(exerciseTitle)}
         />
-        <Button title="Add Set" onPress={handleAddSet}></Button>
+        <Pressable onPress={handleAddSet} style={{alignSelf: 'center', paddingHorizontal: 5}}>
+          <Text style={{color: '#167C9D', alignSelf: 'center', fontWeight: 'bold'}}>
+            Add set
+          </Text>
+        </Pressable>
         <SetsContainer>
           <FlatList
             keyExtractor={(item, index) => index.toString()}

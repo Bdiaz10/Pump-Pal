@@ -1,20 +1,10 @@
 import React from "react";
-import {View, Text, FlatList} from "react-native";
+import {View, Text, FlatList, StyleSheet, TouchableOpacity} from "react-native";
 import { useState, useEffect } from "react";
 import {auth} from "../firebase";
 import {doc, getDoc, getDocs, query, collection, where} from 'firebase/firestore';
 import {db} from "../firebase";
-
-const ProfileCard = ({item}) => {
-  return (
-    <View>
-      <Text>
-        {item.email}
-      </Text>
-      
-    </View>
-  )
-}
+import ProfileCard from '../components/ProfileCard';
 
 
 const ViewFollowersScreen = ({navigation}) => {
@@ -36,7 +26,9 @@ const ViewFollowersScreen = ({navigation}) => {
           userName: user.userName,
           email: user.email,
           createdAt: user.createdAt,
-          userImg: user.userImg
+          userImg: user.userImg,
+          followers: user.followers,
+          following: user.following
         });
       });
       setFollowers(followersUsers);
@@ -51,10 +43,10 @@ const ViewFollowersScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View>
-      <Text>
+    <View style={styles.container}>
+      {/* <Text style={styles.title}>
         Your Followers List
-      </Text>
+      </Text> */}
 
       <FlatList
         data={followers}
@@ -70,4 +62,11 @@ const ViewFollowersScreen = ({navigation}) => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+    marginBottom: 20
+  },
+  
+})
 export default ViewFollowersScreen;

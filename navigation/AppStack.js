@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, TouchableOpacity, Text, Button} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -15,13 +15,24 @@ import FullWorkoutScreen from '../Screens/FullWorkoutScreen';
 import ViewFollowingScreen from '../Screens/ViewFollowingScreen';
 import ViewFollowersScreen from '../Screens/ViewFollowersScreen';
 import AddFriendsScreen from '../Screens/AddFriendsScreen';
+import FriendProfileScreen from '../Screens/FriendProfileScreen'
 
 
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const MyWorkoutStack = ({navigation}) => (
+const MyWorkoutStack = ({navigation}) => {
+  const [postState, setPublicPost] = useState(true);
+  const [button, setButton] = useState("unlock")
+
+  const handleLockClick = () => {
+    setPublicPost(!postState);
+    setButton(!postState ? "lock" : "unlock");
+    navigation.navigate('AddPost', {postState: postState});
+  }
+
+  return(
   <Stack.Navigator>
     <Stack.Screen
       name="MyWorkout"
@@ -29,36 +40,42 @@ const MyWorkoutStack = ({navigation}) => (
       options={{
         headerTitleAlign: 'center',
         headerTitleStyle: {
-          color: '#2e64e5',
+          color: '#167C9D',
           // fontFamily: 'Kufam-SemiBoldItalic',
           fontSize: 18,
+          // fontWeight: 700 
         },
         headerStyle: {
-          shadowColor: '#fff',
+          shadowColor: 'white',
+          backgroundColor: 'white',
           elevation: 0,
         },
         headerRight: () => (
           <View style={{marginRight: 10}}>
             <FontAwesome5.Button
               name="plus"
-              size={22}
-              backgroundColor="#fff"
-              color="#2e64e5"
-              onPress={() => navigation.navigate('AddPost')}
+              size={18}
+              backgroundColor="white"
+              color="#167C9D"
+              onPress={() => {
+                navigation.navigate('AddPost', {postState: true})
+                setButton("unlock");
+                }
+              }
             />
           </View>
         ),
-        headerLeft: () => (
-          <View style={{marginLeft: 10}}>
-            <FontAwesome5.Button
-              name="user"
-              size={22}
-              backgroundColor="#fff"
-              color="#2e64e5"
-              onPress={() => navigation.navigate('Profile')}
-            />
-          </View>
-        ),
+        // headerLeft: () => (
+        //   <View style={{marginLeft: 10}}>
+        //     <FontAwesome5.Button
+        //       name="user"
+        //       size={22}
+        //       backgroundColor="#fff"
+        //       color="#2e64e5"
+        //       onPress={() => navigation.navigate('Profile')}
+        //     />
+        //   </View>
+        // ),
       }}
     />
     <Stack.Screen
@@ -68,29 +85,43 @@ const MyWorkoutStack = ({navigation}) => (
         title: '',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#2e64e515',
-          shadowColor: '#2e64e515',
+          backgroundColor: 'white',
+          shadowColor: 'white',
           elevation: 0,
         },
         headerBackTitleVisible: false,
         headerBackImage: () => (
           <View style={{marginLeft: 15}}>
-            <Ionicons name="arrow-back" size={25} color="#2e64e5" />
+            <Ionicons name="arrow-back" size={25} color='#167C9D' />
           </View>
         ),
-        headerRight: () => (
-          <View style={{marginRight: 10}}>
-            <FontAwesome5.Button
-              name="plus"
-             
-              size={18}
-              onPress={() => alert('Workout Posted')}
-            />
-          </View>
-        ),
+        headerRight: () => {
+          // const [postState, setPublicPost] = useState(true);
+          // const [button, setButton] = useState(postState ? "unlock" : "lock")
+
+          // const handleLockClick = () => {
+          //   setPublicPost(!postState);
+          //   setButton(!postState ? "lock" : "unlock");
+          //   // navigation.navigate('AddPost', {postState});
+          // }
+          return(
+            <View style={{marginRight: 0}}>
+              <FontAwesome5.Button
+                name={button}
+                color={'#167C9D'}
+                backgroundColor={'white'}
+                size={18}
+                onPress={handleLockClick}
+                              // onPress={() => navigation.navigate('AddPost', {postState: postState})}
+
+              />
+            </View>
+          )
+        }
+        
       }}
     />
-    <Stack.Screen
+    {/* <Stack.Screen
       name="Profile"
       component={ProfileScreen}
       options={{
@@ -108,7 +139,7 @@ const MyWorkoutStack = ({navigation}) => (
           </View>
         ),
       }}
-    />
+    /> */}
     <Stack.Screen
       name="FullWorkout"
       component={FullWorkoutScreen}
@@ -116,14 +147,14 @@ const MyWorkoutStack = ({navigation}) => (
         title: '',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#2e64e515',
-          shadowColor: '#2e64e515',
+          backgroundColor: 'white',
+          shadowColor: 'white',
           elevation: 0,
         },
         headerBackTitleVisible: false,
         headerBackImage: () => (
           <View style={{marginLeft: 15}}>
-            <Ionicons name="arrow-back" size={25} color="#2e64e5" />
+            <Ionicons name="arrow-back" size={22} color="#167C9D" />
           </View>
         ),
       }}
@@ -131,7 +162,7 @@ const MyWorkoutStack = ({navigation}) => (
 
       
   </Stack.Navigator>
-);
+)};
 
 const WorkoutFeedStack = ({navigation}) => (
   <Stack.Navigator>
@@ -141,15 +172,28 @@ const WorkoutFeedStack = ({navigation}) => (
       options={{
         headerTitleAlign: 'center',
         headerTitleStyle: {
-          color: '#2e64e5',
+          color: '#167C9D',
           // fontFamily: 'Kufam-SemiBoldItalic',
           fontSize: 18,
         },
         headerStyle: {
           shadowColor: '#fff',
+          backgroundColor: 'white',
           elevation: 0,
         },
+        headerRight: () => (
+          <View style={{marginRight: 10}}>
+            <FontAwesome5.Button
+              name="search"
+              backgroundColor="#fff"
+              color="#167C9D"
+              size={18}
+              onPress={() => navigation.navigate("AddFriends")}
+            />
+          </View>
+        ),
       }}
+      
       />
 
   <Stack.Screen
@@ -166,9 +210,44 @@ const WorkoutFeedStack = ({navigation}) => (
         headerBackTitleVisible: false,
         headerBackImage: () => (
           <View style={{marginLeft: 15}}>
-            <Ionicons name="arrow-back" size={25} color="#2e64e5" />
+            <Ionicons name="arrow-back" size={25} color="#167C9D" />
           </View>
         ),
+      }}
+    />
+
+  <Stack.Screen
+      name="AddFriends"
+      component={AddFriendsScreen}
+      options={{
+        headerTitle: "",     
+        headerTitleAlign: 'center',
+        headerBackTitleVisible: false,
+        headerStyle: {
+          backgroundColor: '#fff',
+          shadowColor: '#fff',
+          elevation: 0,
+        },
+        headerBackImage: () => (
+          <View style={{marginLeft: 15}}>
+            <Ionicons name="arrow-back" size={25} color="#167C9D" />
+          </View>
+        ),
+      }}
+    />
+
+  <Stack.Screen
+      name="FriendProfile"
+      component={FriendProfileScreen}
+      options={{
+        headerTitle: "Friend Screen",
+        headerTitleAlign: 'center',
+        headerBackTitleVisible: true,
+        headerStyle: {
+          backgroundColor: '#fff',
+          shadowColor: '#fff',
+          elevation: 0,
+        },
       }}
     />
   </Stack.Navigator>
@@ -181,7 +260,21 @@ const ProfileStack = ({navigation}) => (
       name="Profiles"
       component={ProfileScreen}
       options={{
+        headerTitleStyle: {
+          color:"#167C9D"
+        },
         // headerShown: false,
+        headerRight: () => (
+          <View style={{marginRight: 10}}>
+            <FontAwesome5.Button
+              name="edit"
+              backgroundColor="#fff"
+              color="#167C9D"
+              size={20}
+              onPress={() => navigation.navigate("EditProfile")}
+            />
+          </View>
+        ),
       }}
     />
     <Stack.Screen
@@ -236,12 +329,26 @@ const ProfileStack = ({navigation}) => (
     />
 
     <Stack.Screen
-      name="AddFriends"
-      component={AddFriendsScreen}
+      name="EditProfile"
+      component={EditProfileScreen}
       options={{
-        headerTitle: "Add Friends",
+        headerTitle: "Edit Profile",
         headerTitleAlign: 'center',
-        headerBackTitleVisible: false,
+        headerBackTitleVisible: true,
+        headerStyle: {
+          backgroundColor: '#fff',
+          shadowColor: '#fff',
+          elevation: 0,
+        },
+      }}
+    />
+    <Stack.Screen
+      name="FriendProfile"
+      component={FriendProfileScreen}
+      options={{
+        headerTitle: "Friend Screen",
+        headerTitleAlign: 'center',
+        headerBackTitleVisible: true,
         headerStyle: {
           backgroundColor: '#fff',
           shadowColor: '#fff',
@@ -255,53 +362,55 @@ const ProfileStack = ({navigation}) => (
 const AppStack = () => {
 
   return (
-    <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: '#2e64e5',
-      }}>
-      <Tab.Screen
-        name="MyWorkouts"
-        component={MyWorkoutStack}
-        options={({route}) => ({
-          // tabBarLabel: 'MyWorkouts',
-          // tabBarVisible: route.state && route.state.index === 0,
-          tabBarIcon: ({color, size}) => (
-            <Ionicons
-              name="barbell-sharp"
-              color={color}
-              size={size}
-            />
-          ),
-          headerShown: false
-        })}
-      />
-      <Tab.Screen
-        name="WorkoutFeeds"
-        component={WorkoutFeedStack}
-        options={({route}) => ({
-          tabBarIcon: ({color, size}) => (
-            <Ionicons
-              name="people"
-              color={color}
-              size={size}
-            />
-          ),
-          headerShown: false
-        })}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileStack}
-        options={{
-          // tabBarLabel: 'Home',
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="person-outline" color={color} size={size} />
-          ),
-          headerShown: false
-        }}
-      />
-    </Tab.Navigator>
-  );
+      <Tab.Navigator
+        tabBarOptions={{
+          activeTintColor: '#167C9D',
+          
+        }}>
+        <Tab.Screen
+          name="MyWorkouts"
+          component={MyWorkoutStack}
+          options={({route}) => ({
+            // tabBarLabel: 'MyWorkouts',
+            // tabBarVisible: route.state && route.state.index === 0,
+            tabBarIcon: ({color, size}) => (
+              <Ionicons
+                name="barbell-sharp"
+                color={color}
+                size={size}
+              />
+            ),
+            headerShown: false
+          })}
+        />
+        <Tab.Screen
+          name="WorkoutFeeds"
+          component={WorkoutFeedStack}
+          options={({route}) => ({
+            tabBarIcon: ({color, size}) => (
+              <Ionicons
+                name="people"
+                color={color}
+                size={size}
+              />
+            ),
+            headerShown: false
+          })}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileStack}
+          options={{
+            // tabBarLabel: 'Home',
+            tabBarIcon: ({color, size}) => (
+              <Ionicons name="person-outline" color={color} size={size} />
+            ),
+            headerShown: false
+          }}
+        />
+      </Tab.Navigator>
+ 
+    );
 };
 
 export default AppStack;

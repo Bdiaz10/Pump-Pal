@@ -61,22 +61,22 @@ const OnboardingScreen = ({navigation}) => {
 
     pages={[
       {
-        backgroundColor: '#13AFC2',
-        image: <Image source={require('../assets/favicon.png')} />,
-        title: 'Braxtons app Onboarding',
-        subtitle: 'Done with React Native Onboarding Swiper'
+        backgroundColor: '#167C9D',
+        // image: <Image source={require('../assets/favicon.png')} />,
+        title: 'Welcome to Pump Pal!',
+        subtitle: 'Track your workouts while connecting with friends'
       },
       {
-        backgroundColor: '#0F8A99',
-        image: <Image source={require('../assets/favicon.png')} />,
-        title: 'Onboarding 2',
-        subtitle: 'Done with React Native Onboarding Swiper'
+        backgroundColor: '#167C9D',
+        // image: <Image source={require('../assets/favicon.png')} />,
+        title: 'Track your workouts',
+        subtitle: 'Track workouts daily and measure your progress over time'
       },
       {
-        backgroundColor: '#0B6570',
-        image: <Image source={require('../assets/favicon.png')} />,
-        title: 'Onboarding 3',
-        subtitle: 'Done with React Native Onboarding Swiper'
+        backgroundColor: '#167C9D',
+        // image: <Image source={require('../assets/favicon.png')} />,
+        title: 'Share workouts',
+        subtitle: 'Share your workouts with your followers or keep your workouts private to yourself'
       },
     ]}
     

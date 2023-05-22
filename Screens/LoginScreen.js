@@ -1,24 +1,58 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
+import * as Font from 'expo-font'
+
+import {windowHeight, windowWidth} from '../utils/Dimensions';
 import {AuthContext} from "../navigation/AuthProvider";
+import { useFonts, Pacifico_400Regular } from '@expo-google-fonts/pacifico';
 
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const {login} = useContext(AuthContext);
+  const [isFontLoaded, setFontLoaded] = useState(false);
+
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      'Pacifico-Regular': require('../assets/fonts/Pacifico-Regular.ttf'),
+    });
+  
+    setFontLoaded(true);
+  };
+  
+  useEffect(() => {
+    loadFonts();
+  }, []);
+
+  // const fetchFonts = async () =>
+  //   await Font.loadAsync({
+  //     'Great Vibes': require('../assets/fonts/GreatVibes-Regular.ttf'),
+  // });
+  // let [fontsLoaded] = useFonts({
+  //   Pacifico_400Regular,
+  // });
+  // const [fontsLoaded] = useFonts({
+  //   'Pacifico': require('../assets/fonts/Pacifico-Regular.ttf'),
+  // });
+  
+
+  if (!isFontLoaded) {
+    return null; // or a loading indicator
+  }
 
   return (
+
     <View style={styles.container}>
       {/* <Image
         source={require('../assets/favicon.png')}
         style={styles.logo}
       /> */}
 
-      <Text style={styles.text}>Pump Pal Login</Text>
+      <Text style={styles.text}>Pump Pal </Text>
 
       <FormInput
         labelValue={email}
@@ -60,7 +94,7 @@ const LoginScreen = ({navigation}) => {
 
 
       <TouchableOpacity
-        style={styles.forgotButton} 
+        style={styles.createAccountButton} 
         onPress={() => navigation.navigate('Signup')}>
         <Text style={styles.navButtonText}>
           Don't have account? Create here
@@ -75,10 +109,11 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    paddingTop: 50
+    backgroundColor: '#167C9D',
+    height: windowHeight
   },
   logo: {
     height: 150,
@@ -86,21 +121,27 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   text: {
-    // fontFamily: 'Kufam-SemiBoldItalic',
-    fontSize: 28,
-    marginBottom: 10,
-    color: '#051d5f',
+    fontFamily: 'Pacifico-Regular',
+    fontSize: 50,
+    marginBottom: 40,
+    marginTop: 30,
+    color: 'white',
   },
   navButton: {
     marginTop: 15,
+    
   },
   forgotButton: {
     marginVertical: 35,
   },
+  createAccountButton: {
+  
+  },
   navButtonText: {
+    
     fontSize: 18,
     fontWeight: '500',
-    color: '#2e64e5',
+    color: 'white',
     // fontFamily: 'Lato-Regular',
   },
 });

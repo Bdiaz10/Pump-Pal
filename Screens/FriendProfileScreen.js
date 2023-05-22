@@ -1,13 +1,15 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image} from 'react-native';
 import FormButton from "../components/FormButton"
 import {AuthContext} from "../navigation/AuthProvider";
-// import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import styled from 'styled-components';
 import { useState } from 'react';
 import {doc, getDoc, getDocs, query, collection, where} from 'firebase/firestore';
 import {db, auth} from "../firebase";
 import {windowHeight, windowWidth} from '../utils/Dimensions';
+import {useRoute} from '@react-navigation/native';
+
 
 const UserData = ({data, label, ...rest}) => {
   return(
@@ -26,15 +28,17 @@ const UserData = ({data, label, ...rest}) => {
 
 }
 
-const ProfileScreen = ({navigation}) => {
 
-  const {user, logout} = useContext(AuthContext);
-  const [followerCount, setFollowerCount] = useState(0);
-  const [followingCount, setFollowingCount] = useState(0);
+
+const FriendProfileScreen = ({navigation, item}) => {
+  const {user} = useContext(AuthContext);
+  const route = useRoute();
+  const [followerCount, setFollowerCount] = useState(null);
+  const [followingCount, setFollowingCount] = useState(null);
 
   
   const getFollowersSize =  async () => {
-    const currentUserDoc = await getDoc(doc(db, "Users", auth.currentUser.uid));
+    const currentUserDoc = await getDoc(doc(db, "Users", route.params.userId));
     const followers = currentUserDoc.data().followers;
     const following = currentUserDoc.data().following;
 
@@ -51,6 +55,28 @@ const ProfileScreen = ({navigation}) => {
 
   }
 
+  const handleFollowUser = async (followUser) => {
+    try{
+      // add user to folliwng
+      const userRef = doc(db, "Users", user.uid)
+      await updateDoc(userRef, {
+        following: arrayUnion(followUser.userId)
+      })
+  
+      // add yourself to their followers
+      const followUserRef = doc(db, "Users", followUser.userId);
+      await updateDoc(followUserRef, {
+        followers: arrayUnion(user.uid)
+      })
+  
+    }catch (e){
+      console.log(e);
+    }
+   alert("you are now following " + followUser.email + "!!")
+  
+  
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const [followerCount, followingCount] = await getFollowersSize();
@@ -64,11 +90,8 @@ const ProfileScreen = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.heading}>
 
-
-          <Image style={styles.userImg} source={require('../assets/profile-holder.jpeg')} />
-       
-
-        <Text style={styles.userName}>{user.email}</Text>
+        <Image style={styles.userImg} source={require('../assets/users/pika.png')} />
+        <Text style={styles.userName}>{route.params.email}</Text>
 
         <View style={styles.infoContainer}>
           <UserData
@@ -88,30 +111,28 @@ const ProfileScreen = ({navigation}) => {
             onPress={() => navigation.navigate("ViewFollowers")}
           ></UserData>
         </View>
+
+      <TouchableOpacity style={styles.followButton} onPress={() => {handleFollowUser(route.params)}}>
+        <Text style={styles.followText}>
+          Follow
+        </Text>
+      </TouchableOpacity>
       </View>
 
 
-      
 
-      
-    <TouchableOpacity onPress={logout} style={styles.logoutButton}  >
-      <Text style={styles.logoutText}>
-        Logout
-      </Text>
-    </TouchableOpacity>
       
     </View>
   );
 };
 
-export default ProfileScreen;
+export default FriendProfileScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
     padding: 20,
-    backgroundColor: "white"
   },
   heading: {
     flex: 1
@@ -136,29 +157,23 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       fontWeight: 'bold',
       fontSize: 14,
-      marginBottom: 15
+      marginBottom: 5
   },
-  logoutButton: {
-    position: 'absolute',
-    bottom: 0,
+  followButton: {
     marginTop: 10,
-    marginBottom: 10,
     width: '100%',
-    height: windowHeight / 16,
-    backgroundColor: '#167C9D',
-    padding: 8,
+    height: windowHeight / 15,
+    backgroundColor: '#2e64e5',
+    padding: 10,
     alignItems: 'center',
-    alignSelf: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
+    borderRadius: 3,
   },
-  logoutText: {
+  followText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
-  } ,
+    color: 'black',
+  } 
 
-
-});
   
-
+})

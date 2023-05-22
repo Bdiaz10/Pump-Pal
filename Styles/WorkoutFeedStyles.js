@@ -3,28 +3,35 @@ import styled from 'styled-components';
 export const Container = styled.View`
   flex: 1;
   // justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  padding: 20px;
+  // align-items: center;
+  background-color: white;
+  // border-top-left-radius: 50px;
+  // border-top-right-radius: 50px;
+  padding:0px;
 `;
+
+export const Background = styled.View`
+  z-index: -10;
+`
 
 export const Card = styled.TouchableOpacity`
   background-color: #f8f8f8;
   width: 100%;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-radius: 0px;
+  margin-bottom: 4px;
 `;
 
 export const UserInfo = styled.View`
   flex-direction: row;
   justify-content: flex-start;
-  padding: 15px;
+  padding: 5px;
 `;
 
 export const UserImg = styled.Image`
-  width: 50px;
-  height: 50px;
-  border-radius:;
+  width: 35px;
+  height: 35px;
+  border-radius: 7px;
+  margin-left: 10px;
 `;
 
 export const UserInfoText = styled.View`
@@ -44,14 +51,17 @@ export const PostTime = styled.Text`
 `;
 
 export const WorkoutInfo = styled.View`
+  
   padding-left: 15px;
   padding-right: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 2px;
 `;
 
 export const WorkoutTitle = styled.Text`
+  font-family: 'Lato-Regular';
   font-size: 20px;
   font-weight: bold;
+ 
 `;
 
 export const Divider = styled.View`
@@ -62,7 +72,7 @@ export const Divider = styled.View`
 `;
 
 export const WorkoutNotes = styled.Text`
-  font-size: 13px;
+  font-size: 12px;
   margin-top: 3px;
 
 `;
@@ -70,7 +80,8 @@ export const WorkoutNotes = styled.Text`
 export const InteractionWrapper = styled.View`
     flex-direction: row;
     justify-content: space-around;
-    padding: 15px;
+    padding: 4px;
+    margin-bottom: 5px;
 `;
 
 export const Interaction = styled.TouchableOpacity`
@@ -89,3 +100,5 @@ export const InteractionText = styled.Text`
     margin-top: 5px;
     margin-left: 5px;
 `;
+
+

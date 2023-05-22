@@ -4,9 +4,10 @@ import { useState, useContext } from "react";
 import {collection, getDocs, query, where, doc, updateDoc, arrayUnion} from 'firebase/firestore';
 import {db} from "../firebase";
 import {AuthContext} from "../navigation/AuthProvider"
+import ProfileCard from "../components/ProfileCard";
 
 
-const AddFriendsScreen = () => {
+const AddFriendsScreen = ({navigation}) => {
   const {user} = useContext(AuthContext);
   const [findUser, setFindUser] = useState(null);
   const [usersFound, setUsersFound] = useState(null);
@@ -27,7 +28,9 @@ const AddFriendsScreen = () => {
           postTime,
           content,
           postPublic,
-          email
+          email,
+          following,
+          followers
         } = doc.data();
         
         list.push({
@@ -37,7 +40,9 @@ const AddFriendsScreen = () => {
           postTime,
           content,
           postPublic,
-          email
+          email,
+          following,
+          followers
         });
         
         setUsersFound(list);
@@ -90,21 +95,35 @@ const AddFriendsScreen = () => {
   };
 
   return(
-    <View>
+    <View style={{flex:1, marginHorizontal:0, backgroundColor:"white"}}>
       <TextInput 
         placeholder="Look up friends by their username or email"
+        clearButtonMode="always"
         onChangeText={(findUser) => setFindUser(findUser)}  
+        style={{
+          paddingHorizontal:20, paddingVertical:10, borderColor:'#ccc', borderWidth:1,
+          borderRadius:8, marginHorizontal:10
+        }}
+        autoCapitalize="none"
       >
         
       </TextInput>
 
-      <Button title="Search" onPress={handleSearch}></Button>
+      <Button title="Search" color={"#167C9D"} onPress={handleSearch}></Button>
       <FlatList
         data={usersFound}
         renderItem={({item}) => (
-          <AddFriendsCard 
-            followUser={item}
-          />
+          // <AddFriendsCard 
+          //   followUser={item}
+          // />
+
+          <ProfileCard
+
+            item={item}
+            navigation={navigation}
+          >
+
+          </ProfileCard>
         )}
         keyExtractor={item=>item.toString()}
         showsVerticalScrollIndicator={false}

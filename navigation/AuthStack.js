@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
   // check for first launch
-  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
 
   let routeName;
 
@@ -53,8 +53,8 @@ const AuthStack = () => {
         options={({navigation}) => ({
           title: '',
           headerStyle: {
-            backgroundColor: '#f9fafd',
-            shadowColor: '#f9fafd',
+            backgroundColor: '#167C9D',
+            shadowColor: '#167C9D',
             elevation: 0,
           },
           headerLeft: () => (
@@ -62,8 +62,8 @@ const AuthStack = () => {
               <FontAwesome.Button 
                 name="long-arrow-left"
                 size={25}
-                backgroundColor="#f9fafd"
-                color="#333"
+                backgroundColor="#167C9D"
+                color="white"
                 onPress={() => navigation.navigate('Login')}
               />
             </View>
