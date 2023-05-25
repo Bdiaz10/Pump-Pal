@@ -1,24 +1,25 @@
 import styled from 'styled-components';
 
 export const WorkoutTitle = styled.Text`
-  font-size: 24px;
-  text-align: center;
-  width: 90%;
-  margin-top: 20px;
+font-size: 24px;
+text-align: center;
+width: 90%;
+margin-top: 8px;
 `;
 
 export const WorkoutNotes = styled.Text`
-  font-size: 15px;
-  text-align: center;
-  width: 90%;
-  margin-top: 15px;
-  margin-bottom: 20px;
+font-size: 15px;
+text-align: center;
+width: 90%;
+margin-top: 2px;
 `;
 
 export const TitleWrapper = styled.View`
-  align-items: center;
-  width: 100%;
-  background-color: #2e64e515;
+height: 75px;
+align-items: center;
+width: 100%;
+background-color: #2e64e515;
+border-radius: 15px;
 `
 
 export const Card = styled.View`
@@ -30,11 +31,12 @@ export const Card = styled.View`
 `;
 
 export const WCard = styled.View`
-  background-color: #f8f8f8;
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  margin-top: 10px;
+background-color: #f8f8f8;
+width: 100%;
+align-self: center;
+border-radius: 10px;
+margin-bottom: 3px;
+margin-top: 2px;
 `;
 
 export const WCardTitle = styled.Text`

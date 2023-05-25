@@ -25,9 +25,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "scripts": {
-      "web": "expo start --web"
     }
   }
 }

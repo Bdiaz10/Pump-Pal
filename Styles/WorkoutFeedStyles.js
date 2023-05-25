@@ -2,11 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.View`
   flex: 1;
-  // justify-content: center;
-  // align-items: center;
+  
   background-color: white;
-  // border-top-left-radius: 50px;
-  // border-top-right-radius: 50px;
+  
   padding:0px;
 `;
 

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, TouchableOpacity, Text, Button} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
+import { AuthContext } from './AuthProvider';
 import ProfileScreen from '../Screens/ProfileScreen';
 import EditProfileScreen from '../Screens/EditProfileScreen';
 import MyWorkoutScreen from '../Screens/MyWorkoutScreen';
@@ -65,17 +65,6 @@ const MyWorkoutStack = ({navigation}) => {
             />
           </View>
         ),
-        // headerLeft: () => (
-        //   <View style={{marginLeft: 10}}>
-        //     <FontAwesome5.Button
-        //       name="user"
-        //       size={22}
-        //       backgroundColor="#fff"
-        //       color="#2e64e5"
-        //       onPress={() => navigation.navigate('Profile')}
-        //     />
-        //   </View>
-        // ),
       }}
     />
     <Stack.Screen
@@ -96,14 +85,7 @@ const MyWorkoutStack = ({navigation}) => {
           </View>
         ),
         headerRight: () => {
-          // const [postState, setPublicPost] = useState(true);
-          // const [button, setButton] = useState(postState ? "unlock" : "lock")
-
-          // const handleLockClick = () => {
-          //   setPublicPost(!postState);
-          //   setButton(!postState ? "lock" : "unlock");
-          //   // navigation.navigate('AddPost', {postState});
-          // }
+          
           return(
             <View style={{marginRight: 0}}>
               <FontAwesome5.Button
@@ -112,7 +94,6 @@ const MyWorkoutStack = ({navigation}) => {
                 backgroundColor={'white'}
                 size={18}
                 onPress={handleLockClick}
-                              // onPress={() => navigation.navigate('AddPost', {postState: postState})}
 
               />
             </View>
@@ -121,25 +102,6 @@ const MyWorkoutStack = ({navigation}) => {
         
       }}
     />
-    {/* <Stack.Screen
-      name="Profile"
-      component={ProfileScreen}
-      options={{
-        title: '',
-        headerTitleAlign: 'center',
-        headerStyle: {
-          backgroundColor: '#fff',
-          shadowColor: '#fff',
-          elevation: 0,
-        },
-        headerBackTitleVisible: false,
-        headerBackImage: () => (
-          <View style={{marginLeft: 15}}>
-            <Ionicons name="arrow-back" size={25} color="#2e64e5" />
-          </View>
-        ),
-      }}
-    /> */}
     <Stack.Screen
       name="FullWorkout"
       component={FullWorkoutScreen}
@@ -164,7 +126,8 @@ const MyWorkoutStack = ({navigation}) => {
   </Stack.Navigator>
 )};
 
-const WorkoutFeedStack = ({navigation}) => (
+const WorkoutFeedStack = ({navigation}) => {
+  return(
   <Stack.Navigator>
     <Stack.Screen
       name="WorkoutFeed" 
@@ -203,8 +166,8 @@ const WorkoutFeedStack = ({navigation}) => (
         title: '',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#2e64e515',
-          shadowColor: '#2e64e515',
+          backgroundColor: 'white',
+          shadowColor: 'white',
           elevation: 0,
         },
         headerBackTitleVisible: false,
@@ -251,7 +214,7 @@ const WorkoutFeedStack = ({navigation}) => (
       }}
     />
   </Stack.Navigator>
-);
+)};
 
 
 const ProfileStack = ({navigation}) => (

@@ -69,10 +69,7 @@ const ExercizeCard = ({getExercises}) => {
   
   return (
     // avoiding view isn't working
-    <KeyboardAvoidingView
-      behavior={'padding'}
-      style={{flex:1}}
-      >
+    
       <Card>
         <ETitle 
           value={exerciseTitle}
@@ -97,7 +94,7 @@ const ExercizeCard = ({getExercises}) => {
       </Card>
      
 
-    </KeyboardAvoidingView>
+  
   )
 }
 

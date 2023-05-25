@@ -7,7 +7,7 @@ import ExercizeCard from '../components/ExercizeCard';
 
 import {AuthContext} from "../navigation/AuthProvider"
 import {db} from "../firebase"
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, Timestamp } from "firebase/firestore"; 
 
 
 const AddPostScreen = ({ route, navigation }) => {
@@ -19,9 +19,7 @@ const AddPostScreen = ({ route, navigation }) => {
   
   const  postState  = route.params;
   
-  // useEffect(() => {
-  //   setPostPublic(postState);
-  // }, [postPublic]);
+  
 
   const {user} = useContext(AuthContext);
 
@@ -43,11 +41,12 @@ const AddPostScreen = ({ route, navigation }) => {
         userId: user.uid,
         email: user.email,
         date: Date.now(),
-        postTime: new Date(),
+        postTime: Timestamp.now(),
+        fromDate: Timestamp.fromDate(new Date()),
         content: fullWorkout,
         postPublic: postPublic,
-        likes: null,
-        comments: null
+        likes: 0,
+        comments: []
       })
       alert("Success" + docRef.id);
       
@@ -66,18 +65,7 @@ const AddPostScreen = ({ route, navigation }) => {
     setExercises([...exercises, newExercise])
   }
 
-  // const handleLockClick = () => {
-  //   alert('change privacy')
-  // }
-  // let privacy = () => {
-  //   if (postPublic){
-      
-  //     return "Public";
-  //   }else {
-     
-  //     return "Private";
-  //   }
-  // }
+  
 
 
   return (
@@ -94,20 +82,7 @@ const AddPostScreen = ({ route, navigation }) => {
           numberOfLines={2}
           onChangeText={(workoutDescription) => setWorkoutDescription(workoutDescription)}
           />
-          {/* <Button
-            title={privacy}
-            color={'red'}
-            onPress={() => {setPostPublic(!postPublic)}}
-          /> */}
-
-          {/* <TouchableOpacity onPress={() => {
-            setPostPublic(!postPublic)
-            setPrivacyColor(!postPublic ? '#167C9D' : 'red');
-            }}
-            style={{backgroundColor: privacyColor, width: 350, alignItems: 'center', borderRadius: 20, marginTop: 5}}
-            >
-            <Text style={{color: 'white'}} >{privacy()}</Text>
-          </TouchableOpacity> */}
+          
       </InputTitleWraper>
       <Pressable onPress={handleAddExercise} style={{alignSelf: 'center', paddingHorizontal: 5}}>
           <Text style={{color: '#167C9D', alignSelf: 'center', fontWeight: 'bold', fontSize:16}}>
@@ -124,12 +99,9 @@ const AddPostScreen = ({ route, navigation }) => {
         windowSize={5}
       />
 
-      {/* <Button
-       title="Submit"
-       onPress={() => handleSubmit()}
-      /> */}
+      
 
-      <TouchableOpacity onPress={() => alert('submit')} style={styles.submitButton}  >
+      <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}  >
         <Text style={styles.submitText}>
           Post {postState.postState ? 'Public' : 'Private'}
           

@@ -24,6 +24,11 @@ const PostCard = ({item, navigation}) => {
     commentText = 'Comment';
   }
 
+  const getPostTime = (timeStamp) => {
+    const date = timeStamp.toDate().toString();
+    return date;
+  }
+
   return (
       <Card onPress={()=>navigation.navigate('FullWorkout', item)}>
         <UserInfo>
@@ -31,8 +36,8 @@ const PostCard = ({item, navigation}) => {
           <UserImg source={require('../assets/profile-holder.jpeg')}/>
           <UserInfoText>
             <UserName>{item.email}</UserName>
-            <PostTime>2 hours ago</PostTime>
-            {/* <PostTime>{item.date}</PostTime> */}
+            {/* <PostTime>{JSON.stringify(item.postTime)}</PostTime> */}
+            <PostTime>{getPostTime(item.postTime)}</PostTime>
           </UserInfoText>
 
         </UserInfo>
