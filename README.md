@@ -4,8 +4,8 @@ Welcome to Pump Pal, a React Native and Firebase-powered workout social media ap
 
 # Login & Registration
 <div style="display: flex; justify-content: center; align-items: center;">
-  <img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/a5bc31e5-0f2e-4a18-b386-031bec509432" alt="Login Page" width="300">
-  <img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/c1ef7fdd-5b98-4f22-810a-90c8578573c0" alt="Register Page" width="300">
+  <img src="../assets/signin.png" alt="Login Page" width="300">
+  <img src="..//assets/register.png" alt="Register Page" width="300">
 </div>
 
 
