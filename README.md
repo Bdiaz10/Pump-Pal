@@ -10,16 +10,16 @@ Welcome to Pump Pal, a React Native and Firebase-powered workout social media ap
 
 
 # My Workouts
-<img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/71226f57-99a5-4ea8-a63f-361cd249cc15" alt="My Workouts" width="300">
+<img src="./assets/myworkout.png" alt="My Workouts" width="300">
 
 # Post Workouts
-<img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/31b83b90-f135-47c5-8ac5-d8334796f250" alt="Post Workouts" width="300">
+<img src="./assets/postworkout.png" alt="Post Workouts" width="300">
 
 # Workout Feed
-<img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/e3bd9212-5617-4e2d-87b7-417527e3f30d" alt="Workout Feed" width="300">
+<img src="./assets/feed.png" alt="Workout Feed" width="300">
 
 # Profile Page
-<img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/1790afe1-c041-4933-bbe5-14118733ab09" alt="Profile Page" width="300">
+<img src="./assets/profile.png" alt="Profile Page" width="300">
 
 # Follow Users
-<img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/5a140bf6-c7c0-4cc1-8276-2a02d100942a" alt="Follow Users" width="300">
+<img src="./assets/search.png" alt="Follow Users" width="300">
