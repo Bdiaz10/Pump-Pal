@@ -2,7 +2,7 @@
 Workout tracking mobile application built with React Native and Firebase.
   
 <h1>Login Page</h1>
-<img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/a5bc31e5-0f2e-4a18-b386-031bec509432" alt="Login Page" width="300" heigh="800">
+<img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/a5bc31e5-0f2e-4a18-b386-031bec509432" alt="Login Page" width="300" height="800">
 
 <h1>Register Page</h1>
 <img src="https://github.com/Bdiaz10/Pump-Pal/assets/90151890/c1ef7fdd-5b98-4f22-810a-90c8578573c0" alt="Register Page" width="300">
