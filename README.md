@@ -2,7 +2,7 @@
 Workout tracking mobile application built with React Native and Firebase.
 
 Login Page
-<img src="![Simulator Screen Shot - iPhone 14 - 2023-08-16 at 13 01 47](https://github.com/Bdiaz10/Pump-Pal/assets/90151890/a5bc31e5-0f2e-4a18-b386-031bec509432)" width=300>
+<img src="![Simulator Screen Shot - iPhone 14 - 2023-08-16 at 13 01 47](https://github.com/Bdiaz10/Pump-Pal/assets/90151890/a5bc31e5-0f2e-4a18-b386-031bec509432)" alt="login" width=300>
 
 
 Register Page
