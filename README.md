@@ -4,8 +4,8 @@ Welcome to Pump Pal, a React Native and Firebase-powered workout social media ap
 
 # Login & Registration
 <div style="display: flex; justify-content: center; align-items: center;">
-  <img src="../assets/signin.png" alt="Login Page" width="300">
-  <img src="..//assets/register.png" alt="Register Page" width="300">
+  <img src="./assets/signin.png" alt="Login Page" width="300">
+  <img src=".//assets/register.png" alt="Register Page" width="300">
 </div>
 
 
