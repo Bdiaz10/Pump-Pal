@@ -12,7 +12,7 @@ Welcome to Pump Pal, a React Native and Firebase-powered workout social media ap
 # My Workouts
 <img src="./assets/myworkout.png" alt="My Workouts" width="300">
 
-# Post Workouts
+# Posting Workouts
 <img src="./assets/postworkout.png" alt="Post Workouts" width="300">
 
 # Workout Feed
@@ -21,5 +21,5 @@ Welcome to Pump Pal, a React Native and Firebase-powered workout social media ap
 # Profile Page
 <img src="./assets/profile.png" alt="Profile Page" width="300">
 
-# Follow Users
+# Search for Users
 <img src="./assets/search.png" alt="Follow Users" width="300">
