@@ -5,6 +5,7 @@ Welcome to Pump Pal, a React Native and Firebase-powered workout social media ap
 # The purpose of this project was to explore
 - React Native
 - State Managment
+- Navigation
 - Firebase Integration
 - Serverless Functions
 - Real Time Updates
